@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 100);
         });
     }
-    
+  
     // Seletor de idiomas
     const langPT = document.getElementById('lang-pt');
     const langEN = document.getElementById('lang-en');
