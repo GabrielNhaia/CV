@@ -89,6 +89,42 @@ document.addEventListener('DOMContentLoaded', function() {
     // Inicialização
     animateSkills();
     setActiveNavLink();
+    
+    // Botão de download do currículo
+    const downloadBtn = document.getElementById('downloadCV');
+    const contactSection = document.getElementById('contato');
+    
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', function(e) {
+            // Não interrompe o download, mas adiciona o efeito de ocultar o contato
+            setTimeout(() => {
+                // Anima a seção de contato para desaparecer
+                contactSection.style.opacity = '0';
+                contactSection.style.height = '0';
+                contactSection.style.overflow = 'hidden';
+                contactSection.style.padding = '0';
+                contactSection.style.margin = '0';
+                contactSection.style.transition = 'all 0.5s ease';
+                
+                // Para garantir que o usuário veja a mensagem, rolamos até o botão
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: downloadBtn.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Mostra mensagem de agradecimento
+                    const downloadSection = document.querySelector('.download-cv');
+                    const thankMessage = document.createElement('div');
+                    thankMessage.className = 'thank-message';
+                    thankMessage.innerHTML = '<p>Obrigado pelo interesse! Seu download foi iniciado.</p>';
+                    
+                    // Adiciona a mensagem após o botão
+                    downloadSection.querySelector('.container').appendChild(thankMessage);
+                }, 300);
+            }, 100);
+        });
+    }
 });
 
 // Tema claro/escuro (para implementação futura)
