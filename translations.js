@@ -164,28 +164,22 @@ const translations = {
     }
 };
 
-// Variável para armazenar o idioma atual
 let currentLanguage = 'pt';
 
-// Função para traduzir todos os elementos com data-translate
 function translate(language = 'pt') {
     currentLanguage = language;
     
-    // Salvar preferência do idioma
     localStorage.setItem('language', language);
     
-    // Buscar todos os elementos que têm o atributo data-translate
     const elementsToTranslate = document.querySelectorAll('[data-translate]');
     
     elementsToTranslate.forEach(element => {
         const key = element.getAttribute('data-translate');
         
         if (translations[language] && translations[language][key]) {
-            // Para inputs, atualizar o placeholder
             if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
                 element.placeholder = translations[language][key];
             } else {
-                // Para outros elementos, atualizar o conteúdo de texto
                 element.textContent = translations[language][key];
             }
         } else {
@@ -193,13 +187,10 @@ function translate(language = 'pt') {
         }
     });
     
-    // Atualizar elementos especiais que contêm HTML
     updateSpecialElements(language);
 }
 
-// Função para atualizar elementos que contêm HTML ou necessitam tratamento especial
 function updateSpecialElements(language) {
-    // Links de projetos
     const projectLinks = document.querySelectorAll('.project-link');
     projectLinks.forEach(link => {
         if (translations[language]['ver-projeto']) {
@@ -207,31 +198,26 @@ function updateSpecialElements(language) {
         }
     });
     
-    // Link do GitHub
     const githubLink = document.querySelector('.github-link a');
     if (githubLink && translations[language]['mais-projetos']) {
         githubLink.innerHTML = '<i class="fab fa-github"></i> ' + translations[language]['mais-projetos'];
     }
     
-    // Botão de download CV
     const downloadBtn = document.getElementById('downloadCV');
     if (downloadBtn && translations[language]['download-btn']) {
         downloadBtn.innerHTML = '<i class="fas fa-file-download"></i> ' + translations[language]['download-btn'];
     }
     
-    // Mensagem de agradecimento (se existir)
     const thankMessage = document.querySelector('.thank-message p');
     if (thankMessage && translations[language]['download-obrigado']) {
         thankMessage.textContent = translations[language]['download-obrigado'];
     }
 }
 
-// Função para obter o idioma atual
 function getCurrentLanguage() {
     return currentLanguage;
 }
 
-// Função para obter uma tradução específica
 function getTranslation(key, language = null) {
     const lang = language || currentLanguage;
     
@@ -239,25 +225,20 @@ function getTranslation(key, language = null) {
         return translations[lang][key];
     }
     
-    // Fallback para português se a chave não existir no idioma atual
     if (translations['pt'] && translations['pt'][key]) {
         return translations['pt'][key];
     }
     
-    return key; // Retorna a própria chave se não encontrar tradução
+    return key;
 }
 
-// Inicialização automática quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
-    // Verificar se há idioma salvo no localStorage
     const savedLanguage = localStorage.getItem('language');
     if (savedLanguage && translations[savedLanguage]) {
         currentLanguage = savedLanguage;
     }
     
-    // Aguardar um pouco para garantir que todos os scripts foram carregados
     setTimeout(() => {
-        // Aplicar traduções iniciais
         translate(currentLanguage);
     }, 100);
 });

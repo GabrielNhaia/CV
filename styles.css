@@ -48,7 +48,6 @@ header .subtitle {
     opacity: 0.9;
 }
 
-/* Navegação */
 nav {
     background-color: white;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -87,7 +86,6 @@ nav ul li a:hover {
     color: var(--accent-color);
 }
 
-/* Seletor de idiomas */
 .language-selector {
     display: flex;
     align-items: center;
@@ -116,7 +114,6 @@ nav ul li a:hover {
     color: white;
 }
 
-/* Seções */
 .section {
     padding: 80px 0;
 }
@@ -145,7 +142,6 @@ nav ul li a:hover {
     background-color: var(--gray-color);
 }
 
-/* Seção Sobre */
 .profile-container {
     display: flex;
     align-items: center;
@@ -172,7 +168,6 @@ nav ul li a:hover {
     font-size: 1.1rem;
 }
 
-/* Habilidades */
 .skills-container {
     display: flex;
     flex-wrap: wrap;
@@ -215,7 +210,6 @@ nav ul li a:hover {
     transition: width 1s ease-in-out;
 }
 
-/* Projetos */
 .projects-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -298,7 +292,6 @@ nav ul li a:hover {
     transform: translateY(-2px);
 }
 
-/* Formação */
 .timeline {
     position: relative;
     max-width: 800px;
@@ -355,7 +348,6 @@ nav ul li a:hover {
     margin-bottom: 10px;
 }
 
-/* Download CV */
 .download-cv {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     padding: 60px 0;
@@ -419,7 +411,6 @@ nav ul li a:hover {
     }
 }
 
-/* Contato */
 .contact-container {
     display: flex;
     flex-wrap: wrap;
@@ -562,7 +553,6 @@ nav ul li a:hover {
     }
 }
 
-/* Rodapé */
 footer {
     background-color: var(--dark-color);
     color: white;
