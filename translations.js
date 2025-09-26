@@ -163,3 +163,82 @@ const translations = {
         'rodape-direitos': '© 2023 Gabriel Nhaia. All rights reserved.',
     }
 };
+
+let currentLanguage = 'pt';
+
+function translate(language = 'pt') {
+    currentLanguage = language;
+    
+    localStorage.setItem('language', language);
+    
+    const elementsToTranslate = document.querySelectorAll('[data-translate]');
+    
+    elementsToTranslate.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        
+        if (translations[language] && translations[language][key]) {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                element.placeholder = translations[language][key];
+            } else {
+                element.textContent = translations[language][key];
+            }
+        } else {
+            console.warn(`Translation key "${key}" not found for language "${language}"`);
+        }
+    });
+    
+    updateSpecialElements(language);
+}
+
+function updateSpecialElements(language) {
+    const projectLinks = document.querySelectorAll('.project-link');
+    projectLinks.forEach(link => {
+        if (translations[language]['ver-projeto']) {
+            link.innerHTML = translations[language]['ver-projeto'] + ' <i class="fas fa-arrow-right"></i>';
+        }
+    });
+    
+    const githubLink = document.querySelector('.github-link a');
+    if (githubLink && translations[language]['mais-projetos']) {
+        githubLink.innerHTML = '<i class="fab fa-github"></i> ' + translations[language]['mais-projetos'];
+    }
+    
+    const downloadBtn = document.getElementById('downloadCV');
+    if (downloadBtn && translations[language]['download-btn']) {
+        downloadBtn.innerHTML = '<i class="fas fa-file-download"></i> ' + translations[language]['download-btn'];
+    }
+    
+    const thankMessage = document.querySelector('.thank-message p');
+    if (thankMessage && translations[language]['download-obrigado']) {
+        thankMessage.textContent = translations[language]['download-obrigado'];
+    }
+}
+
+function getCurrentLanguage() {
+    return currentLanguage;
+}
+
+function getTranslation(key, language = null) {
+    const lang = language || currentLanguage;
+    
+    if (translations[lang] && translations[lang][key]) {
+        return translations[lang][key];
+    }
+    
+    if (translations['pt'] && translations['pt'][key]) {
+        return translations['pt'][key];
+    }
+    
+    return key;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const savedLanguage = localStorage.getItem('language');
+    if (savedLanguage && translations[savedLanguage]) {
+        currentLanguage = savedLanguage;
+    }
+    
+    setTimeout(() => {
+        translate(currentLanguage);
+    }, 100);
+});
